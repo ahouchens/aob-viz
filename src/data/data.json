@@ -1,0 +1,30 @@
+{
+  "name": "Multimedia Statistics",
+  "color": "#FFFFFF",
+  "children": [
+    {
+      "minquiz": 17,
+      "noutquiz": 2,
+      "ndocs": 4,
+      "name": "Introduction",
+      "nvid": 6,
+      "moutquiz": 46,
+      "size": 3956,
+      "ninquiz": 22,
+      "color": "#19CDD7",
+      "children": [
+        {
+          "minquiz": 0,
+          "noutquiz": 0,
+          "ndocs": 1,
+          "name": "Course Logistics",
+          "nvid": 0,
+          "moutquiz": 0,
+          "size": 0,
+          "ninquiz": 0,
+          "color": "#DDB27C"
+        }
+      ]
+    }
+  ]
+}
