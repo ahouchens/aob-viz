@@ -161,6 +161,20 @@ function App() {
               loc: count,
               color: color,
               children: [
+                {
+                  name: "Laity",
+                  value: 11,
+                  size: 11,
+                  loc: percentageLaity,
+                  color: color,
+                },
+                {
+                  name: "Clergy",
+                  value: 11,
+                  size: 11,
+                  loc: percentageClergy,
+                  color: color,
+                },
                 // { name: "Clergy", color: "blue", size: 11 },
                 // { name: "Laity", color: "blue", size: percentageLaity },
                 // {
@@ -236,8 +250,6 @@ function App() {
             height: "1000px",
           }}
         >
-          {/* {MyResponsiveCirclePacking({ data: testData })} */}
-
           <CirclePacking
             {...commonProperties}
             data={testData}
@@ -270,7 +282,7 @@ function App() {
             }}
           />
         </div>
-        {/* <div
+        <div
           className="legend"
           style={{
             display: "flex",
@@ -282,7 +294,8 @@ function App() {
         >
           {" "}
           {legendItems}
-        </div> */}
+        </div>{" "}
+        *
       </header>
     </div>
   );
