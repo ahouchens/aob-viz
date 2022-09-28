@@ -161,6 +161,7 @@ function App() {
               loc: count,
               color: color,
               children: [
+                // { name: "Clergy", color: "blue", size: 11 },
                 // { name: "Laity", color: "blue", size: percentageLaity },
                 // {
                 //   name: "Clergy",
@@ -210,6 +211,7 @@ function App() {
       children: [],
       loc: 8654,
     };
+    //@ts-ignore
 
     setTestData(values);
   }, [values]);
@@ -231,7 +233,7 @@ function App() {
         <div
           className="chart"
           style={{
-            height: "800px",
+            height: "1000px",
           }}
         >
           {/* {MyResponsiveCirclePacking({ data: testData })} */}
@@ -240,15 +242,26 @@ function App() {
             {...commonProperties}
             data={testData}
             enableLabels
+            tooltip={({ id, value, color }) => (
+              <div style={{ backgroundColor: "#666", padding: "8px" }}>
+                <strong style={{ color }}>
+                  {id}: {value}
+                </strong>
+              </div>
+            )}
+            label={(input: any) => {
+              //@ts-ignore
+              return input?.data?.name?.length > 9
+                ? `${input.data?.name?.substring(0, 5)}...`
+                : input?.data?.name;
+            }}
             labelsSkipRadius={16}
-            colors={{ scheme: "reds" }}
+            // colors={{ scheme: "blue_purple" }}
             labelsFilter={(label) => label.node.height === 0}
             // labelComponent={(ar) => <div>{ar.label}</div>}
             labelTextColor="black"
             // labelTextColor={{
             //   from: "color",
-
-            //   modifiers: [["darker", 2]],
             // }}
             zoomedId={zoomedId}
             motionConfig="slow"

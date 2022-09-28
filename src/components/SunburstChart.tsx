@@ -68,7 +68,7 @@ function secondsToHms(d) {
 const Chart = ({ data }) => (
   <ReactSunburst
     width={800}
-    height={800}
+    height={1000}
     excludeRoot
     label="name"
     size="size"
