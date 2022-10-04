@@ -33,6 +33,7 @@ function App() {
   const [legendItems, setLegendItems] = React.useState<
     Array<JSX.Element> | undefined
   >();
+  const [authenticated, setAuthenticated] = useState(false);
   const [minPercentage, setMinPercentage] = useState<null | number | string>(0);
 
   const getCSV = () => {
@@ -179,7 +180,16 @@ function App() {
   };
 
   useEffect(() => {
-    getCSV();
+    if (authenticated) {
+      getCSV();
+    } else {
+      let pValue = prompt("Enter pass");
+
+      if (pValue == "blue") {
+        setAuthenticated(true);
+        getCSV();
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -196,73 +206,74 @@ function App() {
       setFilteredValues(values);
     }
   }, [minPercentage]);
+  if (authenticated) {
+    return (
+      <div className="App">
+        <div style={{ margin: "20px" }}>
+          <label style={{ marginRight: "10px" }}>
+            Minimum Percentage
+            <select
+              style={{ marginLeft: "10px" }}
+              defaultValue={0}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setMinPercentage(e.target.value);
+              }}
+            >
+              <option value={0}>0</option>
+              <option value={5}>5</option>
+              <option value={8}>8</option>
+              <option value={10}>10</option>
+              <option value={12}>12</option>
+              <option value={15}>15</option>
+            </select>
+          </label>
+        </div>
 
-  return (
-    <div className="App">
-      <div style={{ margin: "20px" }}>
-        <label style={{ marginRight: "10px" }}>
-          Minimum Percentage
-          <select
-            style={{ marginLeft: "10px" }}
-            defaultValue={0}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setMinPercentage(e.target.value);
-            }}
-          >
-            <option value={0}>0</option>
-            <option value={5}>5</option>
-            <option value={8}>8</option>
-            <option value={10}>10</option>
-            <option value={12}>12</option>
-            <option value={15}>15</option>
-          </select>
-        </label>
-      </div>
+        <Radar
+          data={filteredValues}
+          height={800}
+          width={1700}
+          keys={["Clergy", "Laity"]}
+          indexBy="issue"
+          margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+          valueFormat={(val) => {
+            return Math.round(val) + `%`;
+          }}
+          borderColor={{ from: "color" }}
+          gridLabelOffset={24}
+          dotSize={15}
+          dotColor={{ theme: "background" }}
+          dotBorderWidth={2}
+          colors={{ scheme: "category10" }}
+          blendMode="multiply"
+          motionConfig="wobbly"
+          legends={[
+            {
+              anchor: "top-left",
+              direction: "column",
+              translateX: -50,
+              translateY: -40,
+              itemWidth: 80,
+              itemHeight: 20,
+              itemTextColor: "#999",
 
-      <Radar
-        data={filteredValues}
-        height={800}
-        width={1700}
-        keys={["Clergy", "Laity"]}
-        indexBy="issue"
-        margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-        valueFormat={(val) => {
-          return Math.round(val) + `%`;
-        }}
-        borderColor={{ from: "color" }}
-        gridLabelOffset={24}
-        dotSize={15}
-        dotColor={{ theme: "background" }}
-        dotBorderWidth={2}
-        colors={{ scheme: "category10" }}
-        blendMode="multiply"
-        motionConfig="wobbly"
-        legends={[
-          {
-            anchor: "top-left",
-            direction: "column",
-            translateX: -50,
-            translateY: -40,
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: "#999",
-
-            symbolSize: 12,
-            symbolShape: "square",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000",
+              symbolSize: 12,
+              symbolShape: "square",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemTextColor: "#000",
+                  },
                 },
-              },
-            ],
-          },
-        ]}
-      />
-    </div>
-  );
+              ],
+            },
+          ]}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
