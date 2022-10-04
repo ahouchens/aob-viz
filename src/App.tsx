@@ -183,9 +183,9 @@ function App() {
     if (authenticated) {
       getCSV();
     } else {
-      let pValue = prompt("Enter pass");
+      let pValue = prompt("Enter password");
 
-      if (pValue == "blue") {
+      if (pValue == "IQMA") {
         setAuthenticated(true);
         getCSV();
       }
