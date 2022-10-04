@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Papa, { ParseResult } from "papaparse";
@@ -28,6 +29,7 @@ function App() {
   const [legendItems, setLegendItems] = React.useState<
     Array<JSX.Element> | undefined
   >();
+  console.log("legendItems");
   const [authenticated, setAuthenticated] = useState(false);
   const [minPercentage, setMinPercentage] = useState<null | number | string>(0);
 
@@ -54,7 +56,7 @@ function App() {
 
         //@ts-ignore
         Array.from(setOfAnswers).forEach((i: string) => {
-          if (i == "") {
+          if (i === "") {
             return;
           }
           //@ts-ignore
@@ -62,28 +64,28 @@ function App() {
           let color = faker.color.rgb();
 
           let totalLaityCount = results.data.filter(
-            (i) => i["userType"] == "Laity"
+            (i) => i["userType"] === "Laity"
           );
 
           let totalClergyCount = results.data.filter(
-            (i) => i["userType"] == "Clergy"
+            (i) => i["userType"] === "Clergy"
           );
 
           let count = results.data.reduce((sum, item) => {
             let toAdd = 0;
             //@ts-ignore
 
-            if (item[level1Field]?.trim() == name) {
+            if (item[level1Field]?.trim() === name) {
               toAdd = toAdd + 1;
             }
             //@ts-ignore
 
-            if (item["Q2"]?.trim() == name) {
+            if (item["Q2"]?.trim() === name) {
               toAdd = toAdd + 1;
             }
             //@ts-ignore
 
-            if (item["Q3"]?.trim() == name) {
+            if (item["Q3"]?.trim() === name) {
               toAdd = toAdd + 1;
             }
             return sum + toAdd;
@@ -115,14 +117,14 @@ function App() {
           );
 
           let possibleChildren = results.data.filter(
-            (i) => i["Q1"] == name || i["Q2"] == name || i["Q3"] == name
+            (i) => i["Q1"] === name || i["Q2"] === name || i["Q3"] === name
           );
 
           let childrenLaity = possibleChildren.filter(
-            (i) => i.userType == "Laity"
+            (i) => i.userType === "Laity"
           );
           let childrenClergy = possibleChildren.filter(
-            (i) => i.userType == "Clergy"
+            (i) => i.userType === "Clergy"
           );
 
           let percentageLaity =
@@ -180,7 +182,7 @@ function App() {
     } else {
       let pValue = prompt("Enter password");
 
-      if (pValue == "IQMA") {
+      if (pValue === "IQMA") {
         setAuthenticated(true);
         getCSV();
       }
