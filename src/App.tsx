@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Papa, { ParseResult } from "papaparse";
-import { DataNode, Node } from "sunburst-chart";
+import { Node } from "sunburst-chart";
 import { faker } from "@faker-js/faker";
-import { exit } from "process";
-import { builtinModules } from "module";
-import { JsxElement } from "typescript";
-import { CirclePacking, ResponsiveCirclePacking } from "@nivo/circle-packing";
-import { randomUUID } from "crypto";
 import { Radar } from "@nivo/radar";
 
 type Data = {
